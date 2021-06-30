@@ -1,0 +1,56 @@
+{% extends "quizapp/base.html" %}
+
+{% block content %}
+
+<!-- MODAL LIST OF QUIZZES
+ -->
+
+ {% load static %}
+
+
+ <link rel="stylesheet" type="text/css" href="{% static 'quizapp/css/main.css' %}">
+
+<!-- BOX CODE
+ -->    
+                            
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">Quizzes</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">Quizzes</h2>
+  <a href="{% url 'quizes:create-form' %}" class="btn btn-primary mb-3" role="button">Add quiz</a>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Quiz</th>
+          <th>Subject</th>
+          <th>Questions</th>
+          <th>Time</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in object_list %}
+
+          <tr>
+            <td class="align-middle"><a href="{% url 'quizes:quiz-detail' pk=obj.pk %}">{{obj.name}}</a></td>
+            <td class="align-middle"><span class="badge badge-primary" style="background-color: #343a40">{{obj.topic}}</span></td>
+            <td class="align-middle">{{obj.number_of_questions}}</td>
+            <td class="align-middle">{{obj.time}} mins</td>
+            <td class="text-right"><a href="{% url 'quizes:delete-record' pk=obj.pk %}"><button class="btn btn-danger">Delete</button></a></td>
+
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script src="{% static 'quizapp/js/main.js' %}"></script>
+
+{% endblock %}

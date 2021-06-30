@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Quiz</th>
+          <th>Subject</th>
+          <th>Questions</th>
+          <th>Time</th>
+          <th>Ready?</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in quizes %}
+          <tr>
+            <td class="align-middle">{{ obj.name }}</td>
+            <td class="align-middle">{{ obj.topic}}</td>
+            <td class="align-middle">{{ obj.number_of_questions }} questions</td>
+            <td class="align-middle">{{obj.time}} mins</td>
+
+            <td class="text-right">
+              <a href="{% url 'quizes:quiz-start' obj.pk %}" class="btn btn-primary">Start quiz</a>
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td class="bg-light text-center font-italic" colspan="4">No quiz matching your interests right now.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

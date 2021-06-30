@@ -1,0 +1,51 @@
+{% extends "quizapp/base.html" %}
+
+{% block content %}
+
+ 
+    <h1 class="logo">
+                <a href="{% url 'quizes:main-detail' %}">
+                  My Quizzes                  
+                </a>
+              </h1>
+          
+              
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">{{quiz.name}}</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">{{quiz.name}}</h2>
+  <a href="{% url 'quizes:ques-form' pk=quiz.pk %}" class="btn btn-primary mb-3" role="button">Add question</a>
+  <div class="card">
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Questions</th>
+          <th></th>
+          <th></th>
+          <th></th>
+
+        </tr>
+
+        {% for ques in quiz.questions.all %}
+        <tr>
+          <td class="align-middle"><a href="{% url 'quizes:ans-form' ques.pk quiz.pk %}">{{ques.text}}</a></td>
+          <td></td>
+          <td></td>
+        </tr>
+
+        {% endfor %}
+
+
+
+      </thead>
+      <tbody>
+        
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}
